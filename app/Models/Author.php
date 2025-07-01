@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
     //
+    use HasFactory;
+
+    protected $fillable =['name','biography','category_id','user_id','book_id','image'];
 }
