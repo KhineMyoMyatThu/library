@@ -66,16 +66,25 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button class="btn btn-outline-dark " type="submit">Search</button>
       </form>
-      <div class="d-flex ms-auto">
-        <a href="#" class="btn btn-sm btn-dark ms-3 ">Sign up</a>
+
+
+
+{{--  If not logged in, show Sign up & Login --}}
+@guest
+    <div class="d-flex ms-auto">
+        <a href="#" class="btn btn-sm btn-dark ms-3">Sign Up</a>
         <a href="#" class="btn btn-sm btn-dark ms-3">Login</a>
-      </div>
+    </div>
+@endguest
+
+
 
       <div class="dropdown">
-        <a class="text-dark dropdown-toggle ms-3" href="#" role="btn"
+        <a class="text-dark nav-link dropdown-toggle ms-3" href="#" role="btn"
           id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
         Browse
         </a>
+
 
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
           <li><a class="dropdown-item" href="#">Action</a></li>
@@ -83,6 +92,36 @@
           <li><a class="dropdown-item line-th" href="#">Something else here</a></li>
         </ul>
       </div>
+
+       {{-- ✅ If user is logged in and has role "user" --}}
+    @auth
+    @if(auth()->user()->role == 'user')
+        <div class="nav-item dropdown ">
+            <a href="#" class="nav-link text-dark dropdown-toggle  " data-bs-toggle="dropdown">
+                <img src="{{ asset('user/img/blue_circle.avif') }}" style="width:50px" alt="" class="img-profile rounded-circle me-2">
+                <span class="">{{ auth()->user()->name }}</span>
+            </a>
+             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item line-th" href="#">Something else here</a></li>
+            <form action="" method="POST" class="dropdown-item my-2">
+                @csrf
+                <button type="submit" class="btn hover-effect w-100">Logout</button>
+            </form>
+        </ul>
+
+                {{--  Add your profile links --}}
+                {{-- <a href="{{ route('userProfile#account') }}" class="dropdown-item my-2">Account Profile</a>
+                <a href="{{ route('userProfile#edit') }}" class="dropdown-item my-2">Edit Profile</a>
+                <a href="{{ route('userProfile#password') }}" class="dropdown-item my-2">Change Password</a> --}}
+
+                {{--  Logout form --}}
+
+
+        </div>
+    @endif
+    @endauth
 
     </div>
 
