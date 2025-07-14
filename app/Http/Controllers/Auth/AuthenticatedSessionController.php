@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('user.home.login');
     }
 
     /**
@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         return to_route('adminPage');
        }
         if($request->user()->role == 'user'){
-         return to_route('userPage');
+         return to_route('main');
          }
        return redirect('/');
 

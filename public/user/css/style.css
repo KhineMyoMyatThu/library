@@ -67,6 +67,14 @@
 
 /*** Navbar End ***/
 
+.a-link{
+    color: var(--bs-gray);
+}
+.a-link:hover{
+    color: black !important;
+    text-decoration: underline;
+}
+
 /* banner start */
 #banner{
     background-image: linear-gradient(to right, #74ebd5, #acb6e5);

@@ -72,8 +72,8 @@
 {{--  If not logged in, show Sign up & Login --}}
 @guest
     <div class="d-flex ms-auto">
-        <a href="#" class="btn btn-sm btn-dark ms-3">Sign Up</a>
-        <a href="#" class="btn btn-sm btn-dark ms-3">Login</a>
+        <a href="{{route('register')}}" class="btn btn-sm btn-dark ms-3">Sign Up</a>
+        <a href="{{route('login')}}" class="btn btn-sm btn-dark ms-3">Login</a>
     </div>
 @endguest
 
@@ -105,7 +105,7 @@
                 <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><a class="dropdown-item line-th" href="#">Something else here</a></li>
-            <form action="" method="POST" class="dropdown-item my-2">
+            <form action="{{ route('logout')}}" method="POST" class="dropdown-item my-2">
                 @csrf
                 <button type="submit" class="btn hover-effect w-100">Logout</button>
             </form>
