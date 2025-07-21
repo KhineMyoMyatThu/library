@@ -32,9 +32,9 @@ class AuthenticatedSessionController extends Controller
         return to_route('adminPage');
        }
         if($request->user()->role == 'user'){
-         return to_route('main');
+         return to_route('userPage');
          }
-       return redirect('/');
+       return redirect()->route('guest');
 
     }
 
@@ -49,6 +49,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('guest');
     }
 }

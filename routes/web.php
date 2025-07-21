@@ -9,7 +9,7 @@ use Laravel\Socialite\Facades\Socialite;
 require_once __DIR__.'/admin.php';
 require_once __DIR__.'/user.php';
 
-Route::get('/', [MainPageController::class,'mainPage'])->name('main');
+Route::get('home', [MainPageController::class,'guestPage'])->name('guest');
 
 
 

@@ -95,7 +95,7 @@
 
        {{-- ✅ If user is logged in and has role "user" --}}
     @auth
-    @if(auth()->user()->role == 'user')
+    @if(Auth::check() && Auth::user()->role == 'user')
         <div class="nav-item dropdown ">
             <a href="#" class="nav-link text-dark dropdown-toggle  " data-bs-toggle="dropdown">
                 <img src="{{ asset('user/img/blue_circle.avif') }}" style="width:50px" alt="" class="img-profile rounded-circle me-2">

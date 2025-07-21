@@ -8,18 +8,18 @@ use Illuminate\Support\Facades\Auth;
 class MainPageController extends Controller
 {
     //
-    public function mainPage(){
-        $user = Auth::user();
-        $isVerified = false;
+    public function guestPage(){
 
-          if ($user && $user->email_verified_at) {
-            $isVerified = true;
+        if(Auth::check()){
+            $user = auth()->user;
+
+            if($user->role() == 'user'){
+                return redirect()->route('userPage');
+            }elseif($user->role() == 'admin'){
+                return redirect()->route('adminPage');
+            }
         }
-
-        return view('user.home.main', [
-            'user' => $user,
-            'isVerified' => $isVerified,
-        ]);
-
+        return view('user.home.guest');
     }
+
 }
