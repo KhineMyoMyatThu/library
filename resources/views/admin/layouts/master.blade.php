@@ -30,14 +30,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fa-solid fa-book-open"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Code Lab Studio</div>
+                <div class="sidebar-brand-text mx-3">Book Studio</div>
             </a>
 
             <!-- Divider -->
@@ -45,32 +45,35 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fas fa-fw fa-table"></i><span>Dashboard </span></a>
+                <a class="nav-link "  href=""><i class="fas fa-fw fa-table"></i><span>Dashboard </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-circle-plus"></i></i><span>Category </span></a>
+                <a class="nav-link" href=""><i class="fa-solid fa-users"></i><span>User List </span></a>
+            </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Category </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Products </span></a>
+                <a class="nav-link" href="{{ route('category#list')}}"><i class="fa-solid fa-list"></i><span>Category List </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-layer-group"></i><span>Product List </span></a>
+                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Book </span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href=""><i class="fa-solid fa-book"></i><span>Books List </span></a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Author </span></a>
             </li>
 
 
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-credit-card"></i></i><span>Payment Method </span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-list"></i><span>Sale Information </span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-cart-shopping"></i><span>Order Board </span></a>
+                <a class="nav-link" href="#"><i class="fa-solid fa-people-line"></i><span>Author List </span></a>
             </li>
 
             <li class="nav-item">
@@ -108,7 +111,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Code Lab</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Library</span>
                                 <img class="img-profile rounded-circle" src="">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -140,8 +143,8 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <span class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
-                                    <form action="" method="post">
-
+                                    <form action="{{ route('logout')}}" method="post">
+                                        @csrf
                                         <input type="submit" class="btn btn-dark text-white w-100" value="Logout">
                                     </form>
                                 </span>
@@ -154,6 +157,8 @@
                 <!-- End of Topbar -->
 
                 @yield('content')
+
+                @include('sweetalert::alert')
 
                 <!-- Bootstrap core JavaScript-->
                 <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>

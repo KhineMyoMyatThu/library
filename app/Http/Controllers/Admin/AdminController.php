@@ -11,4 +11,5 @@ class AdminController extends Controller
     public function adminPage(){
         return view('admin.home.list');
     }
+
 }
