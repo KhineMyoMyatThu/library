@@ -52,10 +52,6 @@
                 <a class="nav-link" href=""><i class="fa-solid fa-users"></i><span>User List </span></a>
             </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Category </span></a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('category#list')}}"><i class="fa-solid fa-list"></i><span>Category List </span></a>
             </li>
