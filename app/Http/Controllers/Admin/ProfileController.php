@@ -36,7 +36,11 @@ class ProfileController extends Controller
 
     }
 
+    public function account(){
+        return view('admin.profile.accountProfile');
+    }
 
+    //validation check for password change
     private function checkValidation($request){
         $request->validate(
             [
