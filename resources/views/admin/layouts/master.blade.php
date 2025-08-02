@@ -133,7 +133,7 @@
                                 </a>
 
 
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{{route('profile#changePassword')}}">
                                     <i class="fa-solid fa-lock fa-sm fa-fw mr-2 text-gray-400"></i></i></i>
                                     Change Password
                                 </a>
