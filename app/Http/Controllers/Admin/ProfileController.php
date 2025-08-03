@@ -36,8 +36,14 @@ class ProfileController extends Controller
 
     }
 
+
+    //account page
     public function account(){
         return view('admin.profile.accountProfile');
+    }
+
+    public function editAccount(){
+        return view('admin.profile.editAccount');
     }
 
     //validation check for password change

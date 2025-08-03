@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
+            $table->string('phone')->default('---');
+            $table->text('address')->default('---');
             $table->string('profile')->nullable();
             $table->string('role')->default('user');
             $table->string('provider')->nullable();

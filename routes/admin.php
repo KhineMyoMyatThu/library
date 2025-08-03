@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
         route::post('password/update',[ProfileController::class,'update'])->name('profile#updatePassword');
 
         route::get('account',[ProfileController::class,'account'])->name('profile#account');
+        route::get('account/edit',[ProfileController::class,'editAccount'])->name('profile#editAccount');
 
     });
 });

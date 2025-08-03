@@ -9,45 +9,33 @@
         <!-- Profile Image -->
         <div class="row">
             <div class="col-5">
-                <img src="https://i.imgur.com/1Q9Z1Z1.jpg" alt="Profile" class="rounded-circle" width="150" height="150">
+                <img src="{{ asset(Auth::user()->profile == null ? 'admin/img/undraw_profile.svg' : 'profile/'.Auth::user()->profile )}}" alt="Profile" class="rounded-circle" width="150" height="150">
                 <!-- Profile Name and Edit Button -->
-                     <h4 class="mt-3 mb-0">Kanye West</h4>
-                    <small class="text-muted">San Francisco, CA</small>
-                    <button type="button" class="btn btn-light btn-sm rounded-circle position-absolute bottom-0 end-0" data-bs-toggle="tooltip" title="Update">
-                        <i class="bi bi-upload"></i>
-                    </button>
-
+                     <h4 class="mt-3 mb-0">{{Auth::user()->name == null ? Auth::user()->nickname : Auth::user()->name}}</h4>
                     <div class="mt-2">
-                        <button class="btn btn-info btn-sm">EDIT</button>
+                        <a href="{{ route('profile#editAccount')}}" class="btn btn-info btn-sm">Edit</a>
                     </div>
             </div>
             <div class="col-7">
-                <h5 class="mt-3">Profile Information</h5>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h5 class="mt-3 text-primary">Profile Information</h5>
+
                     <!-- Info List -->
                     <div class="row text-start mt-4">
                     <div class="col-6">
-                        <div class="text-muted small">Email</div>
-                        <div>kanye@aweso.me</div>
+                        <div class="text-dark ">Email</div>
+                        <div class="text-primary">{{ Auth::user()->email}}</div>
                     </div>
                     <div class="col-6">
-                        <div class="text-muted small">City</div>
-                        <div>San Francisco</div>
+                        <div class="text-dark ">Address</div>
+                        <div class="text-primary">{{ Auth::user()->address}}</div>
                     </div>
-                    <div class="col-6 mt-2">
-                        <div class="text-muted small">State</div>
-                        <div>CA</div>
-                    </div>
-                    <div class="col-6 mt-2">
-                        <div class="text-muted small">Country</div>
-                        <div>USA</div>
-                    </div>
+
                     <div class="col-12 mt-2">
-                        <div class="text-muted small">Phone</div>
-                        <div>+1 (415) 655-17-10</div>
+                        <div class="text-dark ">Phone</div>
+                        <div class="text-primary">{{ Auth::user()->phone}}</div>
                     </div>
                     </div>
-                        </div>
+                    </div>
         </div>
 
       </div>

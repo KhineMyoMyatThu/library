@@ -3,7 +3,7 @@
 @section('content')
  <div class="container-fluid">
      <div class="">
-        <a href="{{ route('adminPage')}}" class="btn btn-sm btn-dark ">Back</a>
+        <a href="{{ route('profile#account')}}" class="btn btn-sm btn-dark ">Back</a>
     </div>
 
    <div class="row justify-content-center">
@@ -16,13 +16,8 @@
             <form action="{{ route('profile#updatePassword')}}" method="POST">
                 @csrf
               <div class="my-2">
-                <label for="newPassword" class="form-label text-dark">Old Password</label>
-                <input type="password" class="form-control @error ('oldPassword') is-invalid @enderror"  name="oldPassword" placeholder="Enter old password">
-                {{-- <div class="progress mt-2" style="height: 5px;">
-                  <div class="progress-bar bg-danger" style="width: 20%;"></div>
-                </div>
-                <small class="text-danger">Very weak</small> --}}
-
+                <label for="name">Name</label>
+                <input type="text" name="name" id="">
                 @error('oldPassword')
                 <small class="text-center">{{$message}}</small>
                 @enderror
