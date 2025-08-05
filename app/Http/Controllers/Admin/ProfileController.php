@@ -46,6 +46,20 @@ class ProfileController extends Controller
         return view('admin.profile.editAccount');
     }
 
+    public function updateAccount(Request $request){
+        $this->checkAccountValidation($request);
+
+        auth()->user()->update([
+            'name' -> $request->name,
+            'email' -> $request->email,
+            'phone' -> $request->phone,
+            'address' -> $request->address,
+        ]);
+
+
+
+    }
+
     //validation check for password change
     private function checkValidation($request){
         $request->validate(
@@ -55,5 +69,15 @@ class ProfileController extends Controller
                 'confirmPassword' => 'required|min:8|max:15|same:newPassword',
             ]
             );
+    }
+
+    private function checkAccountValidation($request){
+        $request->validate([
+            'name' => 'required|min:3|max:20',
+            'email' => 'required|email|unique',
+            'phone' => 'required|min:11|max:11',
+            'address' => 'required|min:5|max:50',
+            // 'image' => 'mimes:jpg,jpeg,png,gif,webp'
+        ]);
     }
 }

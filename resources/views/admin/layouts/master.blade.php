@@ -176,6 +176,18 @@
                 <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
                 <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script>
 
+                <script>
+                    function loadFile(event){
+                        var reader = new  FileReader();
+                        reader.onload = function(){
+                            var output = document.getElementById('output');
+                            output.src = reader.result;
+
+                        };
+
+                        reader.readAsDataURL(event.target.files[0]);
+                    }
+                </script>
 
 </body>
 

@@ -2,48 +2,80 @@
 
 @section('content')
  <div class="container-fluid">
-     <div class="">
+     <div class="my-3">
         <a href="{{ route('profile#account')}}" class="btn btn-sm btn-dark ">Back</a>
     </div>
 
-   <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card shadow">
-          <div class="card-body">
-            <h3 class="text-center text-primary mb-3">Password Reset</h3>
-            <p class="text-center">Enter your new password for your Slack account.</p>
+    <form action="{{ route('profile#updateAccount')}}" method="POST" enctype="multipart/form-data">
+        @csrf
 
-            <form action="{{ route('profile#updatePassword')}}" method="POST">
-                @csrf
-              <div class="my-2">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="">
-                @error('oldPassword')
-                <small class="text-center">{{$message}}</small>
-                @enderror
-              </div>
-              <div class="my-2">
-                  <label for="newPassword" class="form-label text-dark">New Password</label>
-                <input type="password" class="form-control @error ('newPassword') is-invalid @enderror" name="newPassword" placeholder="Enter new password">
-                     @error('newPassword')
-                <small class="text-center">{{$message}}</small>
-                @enderror
+        <div class="card shadow p-3">
+            <div class="row">
+                <div class="col-3">
+                    <input type="hidden" name="oldImage">
+
+                    <img src="{{ asset('admin/img/undraw_profile.svg')}}" alt="" class="img-thumbnail img-profile" id="output" >
+                    <input type="file" name="image" src="" alt="" class="form-control @error('image') is-invalid  @enderror">
+
+                    @error('image')
+                    <small class="invalid-feedback">{{$message}}</small>
+                    @enderror
+                </div>
 
 
-              <div class="my-2">
-                  <label for="newPassword" class="form-label text-dark">Confirm Password</label>
-                <input type="password" class="form-control @error ('confirmPassword') is-invalid @enderror" name="confirmPassword"  placeholder="Confirm new password">
-                     @error('confirmPassword')
-                <small class="text-center">{{$message}}</small>
-                @enderror
-              </div>
+                <div class="col">
+                    <div class="row mt-3">
+                        <div class="col-2">Name</div>
+                        <div class="col">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter name.." id="" value="{{ old('name', Auth::user()->name)}}">
 
-              <button type="submit" class="btn btn-dark w-100">Change my password</button>
-            </form>
+                            @error('name')
+                            <small class="invalid-feedback">{{$message}}</small>
+                            @enderror
+                        </div>
+                    </div>
 
-          </div>
+                      <div class="row mt-3">
+                        <div class="col-2">Email</div>
+                        <div class="col">
+                             <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="" placeholder="Enter Email..." value="{{old('email', Auth::user()->email)}}">
+                            @error('email')
+                            <small class="invalid-feedback">{{$message}}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                      <div class="row mt-3">
+                        <div class="col-2">Phone</div>
+                        <div class="col">
+                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter phone.." id="" value="{{old('phone', Auth::user()->phone)}}">
+                            @error('phone')
+                            <small class="invalid-feedback">{{$message}}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-2">Address</div>
+                        <div class="col">
+                            <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" id="" placeholder="Enter Address.." value="{{old('address', Auth::user()->address)}}">
+
+                            @error('address')
+                            <small class="invalid-feedback">{{$message}}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2"></div>
+                        <div class="col">
+                          <input type="submit" value="Update" class="btn btn-dark text-white">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-      </div>
-    </div>
+    </form>
  </div>
 @endsection

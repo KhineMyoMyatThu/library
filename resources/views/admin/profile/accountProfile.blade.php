@@ -27,12 +27,12 @@
                     </div>
                     <div class="col-6">
                         <div class="text-dark ">Address</div>
-                        <div class="text-primary">{{ Auth::user()->address}}</div>
+                        <div class="text-primary">{{ Auth::user()->address == null ? '---' : Auth::user()->address}}</div>
                     </div>
 
                     <div class="col-12 mt-2">
                         <div class="text-dark ">Phone</div>
-                        <div class="text-primary">{{ Auth::user()->phone}}</div>
+                        <div class="text-primary">{{ Auth::user()->phone == null? '---' :  Auth::user()->phone}}</div>
                     </div>
                     </div>
                     </div>

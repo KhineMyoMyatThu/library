@@ -23,6 +23,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
 
         route::get('account',[ProfileController::class,'account'])->name('profile#account');
         route::get('account/edit',[ProfileController::class,'editAccount'])->name('profile#editAccount');
+        route::post('account/update', [ProfileController::class,'updateAccount'])->name('profile#updateAccount');
 
     });
 });
