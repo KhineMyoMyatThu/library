@@ -14,8 +14,9 @@
                 <div class="col-3">
                     <input type="hidden" name="oldImage">
 
-                    <img src="{{ asset('admin/img/undraw_profile.svg')}}" alt="" class="img-thumbnail img-profile" id="output" >
-                    <input type="file" name="image" src="" alt="" class="form-control @error('image') is-invalid  @enderror">
+                    <img src="{{ asset(Auth::user()->profile == null ? 'admin/img/undraw_profile.svg' : 'profile/'.Auth::user()->profile )}}" alt="" class="img-thumbnail img-profile" id="output" >
+
+                    <input type="file" name="image" src="" alt="" class="form-control @error('image') is-invalid  @enderror" onchange="loadFile(event)">
 
                     @error('image')
                     <small class="invalid-feedback">{{$message}}</small>

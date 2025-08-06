@@ -10,6 +10,7 @@
         <div class="row">
             <div class="col-5">
                 <img src="{{ asset(Auth::user()->profile == null ? 'admin/img/undraw_profile.svg' : 'profile/'.Auth::user()->profile )}}" alt="Profile" class="rounded-circle" width="150" height="150">
+
                 <!-- Profile Name and Edit Button -->
                      <h4 class="mt-3 mb-0">{{Auth::user()->name == null ? Auth::user()->nickname : Auth::user()->name}}</h4>
                     <div class="mt-2">

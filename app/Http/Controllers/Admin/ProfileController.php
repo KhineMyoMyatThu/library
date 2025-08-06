@@ -49,15 +49,30 @@ class ProfileController extends Controller
     public function updateAccount(Request $request){
         $this->checkAccountValidation($request);
 
-        auth()->user()->update([
-            'name' -> $request->name,
-            'email' -> $request->email,
-            'phone' -> $request->phone,
-            'address' -> $request->address,
+        $data = $this->requestProfileData($request);
+
+        if($request->hasFile('image')){
+            $fileName = uniqid().request()->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path().'/profile/',$fileName);
+            $data['profile'] =$fileName;
+        }else{
+            $data['profile'] = Auth::user()->profile;
+        }
+     User::where('id',Auth::user()->id)->update($data);
+
+     Alert::success('Account updated successfully');
+     return to_route('profile#editAccount');
+
+
+    }
+
+    private function requestProfileData($request){
+        return([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
         ]);
-
-
-
     }
 
     //validation check for password change
@@ -74,10 +89,11 @@ class ProfileController extends Controller
     private function checkAccountValidation($request){
         $request->validate([
             'name' => 'required|min:3|max:20',
-            'email' => 'required|email|unique',
-            'phone' => 'required|min:11|max:11',
-            'address' => 'required|min:5|max:50',
-            // 'image' => 'mimes:jpg,jpeg,png,gif,webp'
+            'email' => 'required|email|unique:users,email,'.Auth::user()->id,
+            'phone' => 'required|unique:users,phone,'.Auth::user()->id,
+            'address'=> 'required|max:255'
+
+
         ]);
     }
 }
