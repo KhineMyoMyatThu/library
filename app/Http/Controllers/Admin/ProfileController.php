@@ -52,6 +52,15 @@ class ProfileController extends Controller
         $data = $this->requestProfileData($request);
 
         if($request->hasFile('image')){
+
+            //delete old image
+            if(Auth::user()->profile != null){
+                if(file_exists (public_path('profile/'.Auth::user()->profile ))){
+                    unlink(public_path('profile/'.Auth::user()->profile));
+                }
+            }
+
+            //stor new image
             $fileName = uniqid().request()->file('image')->getClientOriginalName();
             $request->file('image')->move(public_path().'/profile/',$fileName);
             $data['profile'] =$fileName;
@@ -91,7 +100,8 @@ class ProfileController extends Controller
             'name' => 'required|min:3|max:20',
             'email' => 'required|email|unique:users,email,'.Auth::user()->id,
             'phone' => 'required|unique:users,phone,'.Auth::user()->id,
-            'address'=> 'required|max:255'
+            'address'=> 'required|max:255',
+            'image' => 'mimes:jpg,jpeg,png|max:2048',
 
 
         ]);

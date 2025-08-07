@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\CategoryController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProfileController;
 
 Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
     route::get('home',[AdminController::class,'adminPage'])->name('adminPage');
@@ -25,5 +26,10 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
         route::get('account/edit',[ProfileController::class,'editAccount'])->name('profile#editAccount');
         route::post('account/update', [ProfileController::class,'updateAccount'])->name('profile#updateAccount');
 
+    });
+
+
+    route::group(['prefix'=> 'author'], function(){
+        route::get('create',[AuthorController::class,'create'])->name('author#create');
     });
 });
