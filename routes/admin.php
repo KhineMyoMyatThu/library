@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfileController;
+use Illuminate\Container\Attributes\Auth;
 
 Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
     route::get('home',[AdminController::class,'adminPage'])->name('adminPage');
@@ -31,5 +32,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
 
     route::group(['prefix'=> 'author'], function(){
         route::get('create',[AuthorController::class,'create'])->name('author#create');
+        route::post('store',[AuthorController::class,'store'])->name('author#store');
+        route::get('list',[AuthorController::class,'list'])->name('author#list');
     });
 });
