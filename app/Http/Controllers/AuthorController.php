@@ -9,14 +9,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthorController extends Controller
 {
-    //create author page
+    // author page
 
     public function create(){
-        $categorise = Category::all();
-        return view('admin.author.create' ,compact('categories'));
+
+        return view('admin.author.create');
     }
 
-    //store author
+    //create author
     public function store(Request $request){
         $this->checkValidation($request);
 
@@ -24,32 +24,35 @@ class AuthorController extends Controller
 
 
         if($request->hasFile('image')){
-            if(file_exists(public_path('author/'.Author::image))){
-                inlink(public_path('author/'.Author::image));
-            }
+
 
             //create new author image
-            $fileName = uniqid().request()->file('image')->getClientOriginalName();
+            $fileName = uniqid().$request->file('image')->getClientOriginalName();
             $request->file('image')->move(public_path().'/author/', $fileName);
             $data['image'] = $fileName;
-        }else{
-              $data['profile'] = Auth::user()->profile;
         }
 
-         Author::where('id',Author::id)->update($data);
+         Author::create($data);
 
      Alert::success('Account updated successfully');
-     return to_route('profile');
+     return to_route('author#list');
 
 
 
+    }
+
+    //author list
+    public function list(){
+        $authors = Author::orderBy('created_at','desc')->paginate(3);
+
+        return view('admin.author.list',compact('authors'));
     }
 
     private function requestAuthorData($request){
         return([
             'name' => $request->name,
             'biography' => $request->biography,
-            'category_id'=> $request->categoryId,
+
         ]);
     }
 
@@ -57,7 +60,6 @@ class AuthorController extends Controller
         $request->validate([
             'name' => 'required',
             'biography' => 'required',
-            'categoryId' => 'required|exists:categories,id',
             'image' => 'mimes:jpg,jpeg,png,webp'
         ]);
     }

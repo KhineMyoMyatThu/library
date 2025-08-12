@@ -36,7 +36,7 @@
                         </div>
                     </div>
 
-                      <div class="row mt-3">
+                      {{-- <div class="row mt-3">
                         <div class="col-2">Category Name:</div>
                         <div class="col">
                                 <select name="categoryId" id="" class="form-control @error ('categoryId') is-invalid @enderror">
@@ -51,7 +51,7 @@
                             <small class="invalid-feedback">{{$message}}</small>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
 
                       <div class="row mt-3">
                         <div class="col-2">About</div>

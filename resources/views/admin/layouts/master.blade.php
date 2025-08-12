@@ -64,12 +64,12 @@
                 <a class="nav-link" href=""><i class="fa-solid fa-book"></i><span>Books List </span></a>
             </li>
               <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Author </span></a>
+                <a class="nav-link" href="{{  route('author#create') }}"><i class="fa-solid fa-plus"></i></i><span>Add Author </span></a>
             </li>
 
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('author#create')}}"><i class="fa-solid fa-people-line"></i><span>Author List </span></a>
+                <a class="nav-link" href="{{ route('author#list')}}"><i class="fa-solid fa-people-line"></i><span>Author List </span></a>
             </li>
 
             <li class="nav-item">

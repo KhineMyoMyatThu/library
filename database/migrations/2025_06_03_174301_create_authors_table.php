@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('biography');
-            $table->integer('category_id');
-            $table->integer('genre_id');
-            $table->integer('book_id');
             $table->string('image');
             $table->timestamps();
         });
