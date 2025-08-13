@@ -30,14 +30,20 @@
                          @foreach ($authors as $item)
                             <tr>
                             <td>{{$item->id}}</td>
-                            <td class="col-1"><img src="{{ asset('author/'.$item->image)}}" alt="" class="img-thumbnail rounded shadow-sm" style="100px"></td>
+                            <td class="col-3"><img src="{{ asset('author/'.$item->image)}}" alt="" class="img-thumbnail rounded shadow-sm" ></td>
                             <td>{{ $item->name}}</td>
                             <td>{{ $item->biography}}</td>
                             <td>{{$item->created_at->format('j-F-Y')}}</td>
-                            <td>
-                                <a href="" class="btn btn-sm btn-warning mx-2"><i class="fa-pen-to-square fa-solid mr-2"></i>Update</a>
+                            <td >
+                                <div class="d-flex">
+                                    <a href="" class="btn btn-sm btn-warning mr-2">
+                                        <i class="fa-pen-to-square fa-solid "></i>
+                                        </a>
 
-                                <a href="" class="btn btn-sm btn-danger"><i class="fa-trash fa-solid mr-2"></i>Delete</a>
+                                <a href="" class="btn btn-sm btn-danger ">
+                                    <i class="fa-trash fa-solid "></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                      @endforeach

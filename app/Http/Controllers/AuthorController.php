@@ -12,7 +12,6 @@ class AuthorController extends Controller
     // author page
 
     public function create(){
-
         return view('admin.author.create');
     }
 
@@ -28,7 +27,7 @@ class AuthorController extends Controller
 
             //create new author image
             $fileName = uniqid().$request->file('image')->getClientOriginalName();
-            $request->file('image')->move(public_path().'/author/', $fileName);
+            $request->file('image')->move(public_path().'/author/' , $fileName);
             $data['image'] = $fileName;
         }
 
@@ -60,7 +59,7 @@ class AuthorController extends Controller
         $request->validate([
             'name' => 'required',
             'biography' => 'required',
-            'image' => 'mimes:jpg,jpeg,png,webp'
+            'image' => 'required|mimes:jpg,jpeg,png,webp'
         ]);
     }
 
