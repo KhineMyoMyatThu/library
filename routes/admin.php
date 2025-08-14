@@ -34,5 +34,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
         route::get('create',[AuthorController::class,'create'])->name('author#create');
         route::post('store',[AuthorController::class,'store'])->name('author#store');
         route::get('list',[AuthorController::class,'list'])->name('author#list');
+        route::get('update/{id}',[AuthorController::class,'updatePage'])->name('author#updatePage');
+        route::post('update/{id}',[AuthorController::class,'update'])->name('author#update');
     });
 });

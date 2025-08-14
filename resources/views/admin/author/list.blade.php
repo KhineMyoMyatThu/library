@@ -36,7 +36,7 @@
                             <td>{{$item->created_at->format('j-F-Y')}}</td>
                             <td >
                                 <div class="d-flex">
-                                    <a href="" class="btn btn-sm btn-warning mr-2">
+                                    <a href="{{ route('author#updatePage',$item->id)}}" class="btn btn-sm btn-warning mr-2">
                                         <i class="fa-pen-to-square fa-solid "></i>
                                         </a>
 
