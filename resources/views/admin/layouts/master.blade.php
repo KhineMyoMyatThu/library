@@ -57,7 +57,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href=""><i class="fa-solid fa-plus"></i></i><span>Add Book </span></a>
+                <a class="nav-link" href="{{ route('book#create')}}"><i class="fa-solid fa-plus"></i></i><span>Add Book </span></a>
             </li>
 
             <li class="nav-item">

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\BookController;
 use Illuminate\Container\Attributes\Auth;
 
 Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
@@ -37,6 +38,12 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
         route::get('update/{id}',[AuthorController::class,'updatePage'])->name('author#updatePage');
         route::post('update/{id}',[AuthorController::class,'update'])->name('author#update');
         route::get('delete/{id}',[AuthorController::class,'delete'])->name('author#delete');
+
+    });
+
+
+    route::group(['prefix'=> 'book'],function(){
+        route::get('create',[BookController::class,'create'])->name('book#create');
     });
 
 
