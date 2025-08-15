@@ -40,7 +40,7 @@
                                         <i class="fa-pen-to-square fa-solid "></i>
                                         </a>
 
-                                <a href="" class="btn btn-sm btn-danger ">
+                                <a href="{{ route('author#delete',$item->id)}}" class="btn btn-sm btn-danger ">
                                     <i class="fa-trash fa-solid "></i>
                                     </a>
                                 </div>

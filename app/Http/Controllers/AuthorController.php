@@ -79,8 +79,18 @@ class AuthorController extends Controller
         }
 
         Author::where('id',$id)->update($data);
-        Alert::success('Account updated successfully');
+        Alert::success('Author updated successfully');
         return to_route('author#list');
+
+    }
+
+
+    //author delete
+    public function delete($id){
+        Author::where('id',$id)->delete();
+         Alert::success('Author deleted successfully');
+        return to_route('author#list');
+
 
     }
 

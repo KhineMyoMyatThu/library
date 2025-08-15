@@ -36,5 +36,8 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
         route::get('list',[AuthorController::class,'list'])->name('author#list');
         route::get('update/{id}',[AuthorController::class,'updatePage'])->name('author#updatePage');
         route::post('update/{id}',[AuthorController::class,'update'])->name('author#update');
+        route::get('delete/{id}',[AuthorController::class,'delete'])->name('author#delete');
     });
+
+
 });
