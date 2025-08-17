@@ -63,6 +63,48 @@
                         </div>
                     </div>
 
+                    {{-- Category --}}
+                     <div class="row mt-3">
+
+                        <div class="col-2">Category Name</div>
+                        <div class="col">
+                                                                <select name="categoryId" id="" class="form-control @error('categoryId') is-invalid @enderror">
+                                        <option value="">Choose Category...</option>
+
+                                        @foreach ($categories as $item)
+                                            <option value="{{ $item->id }}" @if(old('categoryId') == $item->id) selected @endif>{{ $item->name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('categoryId')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                        </div>
+
+                     </div>
+
+                    {{-- Author --}}
+                     <div class="row mt-3">
+
+                        <div class="col-2">Author Name</div>
+                        <div class="col">
+                            <select name="authorId" id="" class="form-control @error('authorId') is-invalid @enderror">
+                                <option value="">Choose Author...</option>
+
+                                        @foreach ($categories as $item)
+                                            <option value="{{ $item->id }}" @if(old('authorId') == $item->id) selected @endif>{{ $item->name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('authorId')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                        </div>
+
+                     </div>
+
+
+
                      {{-- Title  --}}
                     <div class="row mt-3">
                          <input type="hidden" name="oldImage" value="{{ $book->pdf_path ?? '' }}">
