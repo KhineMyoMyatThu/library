@@ -6,7 +6,7 @@
         <h2>Author</h2>
     </div>
 
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('book#store')}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="card shadow p-3">
@@ -107,13 +107,14 @@
 
                      {{-- Title  --}}
                     <div class="row mt-3">
-                         <input type="hidden" name="oldImage" value="{{ $book->pdf_path ?? '' }}">
+
                         <div class="col-2">Book File</div>
                         <div class="col">
                            <input type="file"
                            name="pdfPath"
+                           accept="application/pdf"
                            class="form-control @error('pdfPath') is-invalid @enderror"
-                           onchange="loadFile(event)">
+                           >
 
                     @error('pdfPath')
                         <small class="invalid-feedback">{{ $message }}</small>

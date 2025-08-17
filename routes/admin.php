@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
 
     route::group(['prefix'=> 'book'],function(){
         route::get('create',[BookController::class,'create'])->name('book#create');
+        route::post('store',[BookController::class,'store'])->name('book#store');
     });
 
 
