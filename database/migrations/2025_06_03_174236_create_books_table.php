@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('image');
             $table->string('pdf_path');
             $table->integer('category_id');
-            $table->integer('genre_id');
             $table->integer('author_id');
             $table->timestamps();
         });

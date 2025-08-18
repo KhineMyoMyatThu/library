@@ -91,7 +91,7 @@
                             <select name="authorId" id="" class="form-control @error('authorId') is-invalid @enderror">
                                 <option value="">Choose Author...</option>
 
-                                        @foreach ($categories as $item)
+                                        @foreach ($authors as $item)
                                             <option value="{{ $item->id }}" @if(old('authorId') == $item->id) selected @endif>{{ $item->name}}</option>
                                         @endforeach
                                     </select>

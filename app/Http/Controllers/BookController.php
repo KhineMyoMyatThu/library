@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BookController extends Controller
@@ -31,16 +33,16 @@ class BookController extends Controller
 
         }
 
-        if ($request->hasFile('pdf')) {
-            $pdfName = uniqid() . $request->file('pdf')->getClientOriginalName();
-            $request->file('pdf')->move(public_path('book/pdf/'), $pdfName);
-            $data['pdf'] = $pdfName;
+        if ($request->hasFile('pdfPath')) {
+            $pdfName = uniqid() . $request->file('pdfPath')->getClientOriginalName();
+            $request->file('pdfPath')->move(public_path().'/pdf/', $pdfName);
+            $data['pdf_path'] = $pdfName;
         }
 
-         Author::create($data);
+         Book::create($data);
 
-     Alert::success('Account updated successfully');
-     return to_route('author#list');
+        Alert::success('Account updated successfully');
+        return to_route('author#list');
     }
 
     private function requestBookData($request){
@@ -49,6 +51,8 @@ class BookController extends Controller
             'description' => $request->description,
             'category_id' => $request->categoryId,
             'author_id' => $request->authorId,
+            'release_year' => $request->release_year,
+
         ]);
     }
 
@@ -59,7 +63,8 @@ class BookController extends Controller
             'categoryId' => 'required',
             'authorId' => 'required',
             'image' => 'mimes:png,jpg,jpeg,webp',
-            'pdfPath' => 'nullable|mimes:pdf|max:2048',
+            'pdfPath' => 'mimes:pdf|max:2048',
+            'release_year' => 'required|min:1900|max:'.date('Y'),
         ]);
     }
 }
