@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Author;
 use App\Models\Category;
@@ -42,7 +43,19 @@ class BookController extends Controller
          Book::create($data);
 
         Alert::success('Account updated successfully');
-        return to_route('author#list');
+        return to_route('book#list');
+    }
+
+    //list book
+    public function list(){
+        $books = Book::select('books.id','books.title','books.description','books.image',
+        'books.pdf_path','books.release_year','books.created_at as book_created_at','categories.id as category_id','categories.name as category_name','authors.id as author_id','authors.name as author_name')
+        ->leftJoin('categories','books.category_id','categories.id')
+        ->leftJoin('authors','books.author_id','authors.id')
+        ->orderBy('books.created_at','desc')
+        ->paginate(3);
+
+        return view('admin.book.list',compact('books'));
     }
 
     private function requestBookData($request){
@@ -51,8 +64,8 @@ class BookController extends Controller
             'description' => $request->description,
             'category_id' => $request->categoryId,
             'author_id' => $request->authorId,
-            'release_year' => $request->release_year,
-
+            'release_year' => $request->releaseYear,
+            'created_at' => Carbon::now(),
         ]);
     }
 
@@ -62,9 +75,9 @@ class BookController extends Controller
             'description'=> 'required',
             'categoryId' => 'required',
             'authorId' => 'required',
-            'image' => 'mimes:png,jpg,jpeg,webp',
-            'pdfPath' => 'mimes:pdf|max:2048',
-            'release_year' => 'required|min:1900|max:'.date('Y'),
+            'image' => 'required|mimes:png,jpg,jpeg,webp',
+            'pdfPath' => 'required|mimes:pdf|max:2048',
+            'releaseYear' => 'required',
         ]);
     }
 }

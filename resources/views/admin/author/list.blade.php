@@ -32,7 +32,7 @@
                             <td>{{$item->id}}</td>
                             <td class="col-3"><img src="{{ asset('author/'.$item->image)}}" alt="" class="img-thumbnail rounded shadow-sm" ></td>
                             <td>{{ $item->name}}</td>
-                            <td>{{ $item->biography}}</td>
+                           <td>{{ Str::limit($item->biography, 20, '...') }}</td>
                             <td>{{$item->created_at->format('j-F-Y')}}</td>
                             <td >
                                 <div class="d-flex">
