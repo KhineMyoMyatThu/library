@@ -46,6 +46,9 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'], function(){
         route::get('create',[BookController::class,'create'])->name('book#create');
         route::post('store',[BookController::class,'store'])->name('book#store');
         route::get('list',[BookController::class,'list'])->name('book#list');
+        route::get('update/{id}',[BookController::class,'updatePage'])->name('book#updatePage');
+        route::post('update/{id}',[BookController::class,'update'])->name('book#update');
+        route::get('delete/{id}',[BookController::class,'delete'])->name('book#delete');
     });
 
 

@@ -105,7 +105,7 @@
 
 
 
-                     {{-- Title  --}}
+                     {{-- pdf path  --}}
                     <div class="row mt-3">
 
                         <div class="col-2">Book File</div>
@@ -122,7 +122,7 @@
                         </div>
                     </div>
 
-                     {{-- Title  --}}
+                     {{-- release year  --}}
                     <div class="row mt-3">
                         <div class="col-2">Release Year</div>
                         <div class="col">

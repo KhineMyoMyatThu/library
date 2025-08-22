@@ -14,10 +14,10 @@
 
 
                   @if ($books->count() !=0)
-                  <div class="card-body shadow">
-                      <table class="table table-hover shadow-sm">
+                  <div class="card-body shadow ">
+                      <table class="table table-hover shadow-sm row">
                              <thead class="bg-dark">
-                            <tr>
+                            <tr >
                                 <th class="text-white">ID</th>
                                 <th class="text-white">Image</th>
                                 <th class="text-white">Title</th>
@@ -32,23 +32,23 @@
                             </tr>
                         </thead>
                          @foreach ($books as $item)
-                            <tr>
+                            <tr >
                             <td>{{$item->id}}</td>
-                            <td class=""><img src="{{ asset('book/'.$item->image)}}" alt="" class="img-thumbnail rounded shadow-sm" style="width: 100px;heigt:100px" ></td>
+                            <td class="col-3"><img src="{{ asset('book/'.$item->image)}}" alt="" class="img-thumbnail rounded shadow-sm" style="" ></td>
                             <td>{{ $item->title}}</td>
-                            <td>{{ Str::limit($item->description, 12, '...') }}</td>
+                            <td>{{ Str::limit($item->description, 10, '...') }}</td>
                             <td>{{ $item->category_name}}</td>
                             <td>{{ $item->author_name}}</td>
-                            <td>{{ Str::limit($item->pdf_path, 10, '...') }}</td>
+                            <td>{{ Str::limit($item->pdf_path, 7, '...') }}</td>
                             <td>{{ $item->release_year}}</td>
-                            <td>{{$item->book_created_at->format('j-F-Y')}}</td>
+                            <td class="fs-5">{{$item->created_at->format('j-F-Y')}}</td>
                             <td >
                                 <div class="d-flex">
-                                    <a href="" class="btn btn-sm btn-warning mr-2">
+                                    <a href="{{ route('book#updatePage',$item->id)}}" class="btn btn-sm btn-warning mr-2">
                                         <i class="fa-pen-to-square fa-solid "></i>
                                         </a>
 
-                                <a href="" class="btn btn-sm btn-danger ">
+                                <a href="{{ route('book#delete',$item->id)}}" class="btn btn-sm btn-danger ">
                                     <i class="fa-trash fa-solid "></i>
                                     </a>
                                 </div>
@@ -58,11 +58,11 @@
                     </table>
                   </div>
 
-                    {{-- <span class="text-dark d-flex justify-content-center">{{ $books->links()}}</span> --}}
+                    <span class="text-dark d-flex justify-content-center">{{ $books->links()}}</span>
                     @else
                     <div class="alert alert-dark text-center">
                         <i class="fa-solid fa-triangle-exclamation"></i>
-                        <span class="ml-2">စာရေးသူအချက်အလက် မရှိပါ</span>
+                        <span class="ml-2">စာအုပ်အချက်အလက် မရှိပါ</span>
                     </div>
                     @endif
                 </div>

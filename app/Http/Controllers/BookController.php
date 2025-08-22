@@ -49,13 +49,27 @@ class BookController extends Controller
     //list book
     public function list(){
         $books = Book::select('books.id','books.title','books.description','books.image',
-        'books.pdf_path','books.release_year','books.created_at as book_created_at','categories.id as category_id','categories.name as category_name','authors.id as author_id','authors.name as author_name')
+        'books.pdf_path','books.release_year','books.created_at','categories.id as category_id','categories.name as category_name','authors.id as author_id','authors.name as author_name')
         ->leftJoin('categories','books.category_id','categories.id')
         ->leftJoin('authors','books.author_id','authors.id')
-        ->orderBy('books.created_at','desc')
-        ->paginate(3);
+        ->orderBy('books.created_at','desc')->paginate(3);
 
         return view('admin.book.list',compact('books'));
+    }
+
+    //direct to update page
+    public function updatePage($id){
+        $book = Book::select('books.id','books.title','books.description','books.image',
+        'books.pdf_path','books.release_year','categories.id as category_id','categories.name as category_name','authors.id as author_id','authors.name as author_name')
+        ->leftJoin('categories','books.category_id','categories.id')
+        ->leftJoin('authors','books.author_id','authors.id')
+        ->where('books.id',$id)->first();
+
+
+        $categories = Category::all();
+        $authors = Author::all();
+
+        return view('admin.book.update',compact('book','categories','authors'));
     }
 
     private function requestBookData($request){
@@ -65,7 +79,7 @@ class BookController extends Controller
             'category_id' => $request->categoryId,
             'author_id' => $request->authorId,
             'release_year' => $request->releaseYear,
-            'created_at' => Carbon::now(),
+
         ]);
     }
 
