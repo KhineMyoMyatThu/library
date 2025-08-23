@@ -21,7 +21,7 @@ class BookController extends Controller
 
     // store Book
     public function store(Request $request){
-        $this->checkBookValidation($request);
+        $this->checkBookValidation($request,'create');
 
         $data = $this->requestBookData($request);
 
@@ -72,6 +72,53 @@ class BookController extends Controller
         return view('admin.book.update',compact('book','categories','authors'));
     }
 
+    //update book
+    public function update(Request $request, $id){
+        $this->checkBookValidation($request, 'update');
+
+        $data = $this->requestBookData($request);
+        $book = Book::findOrFail($id);
+
+        if($request->hasFile('image')){
+
+               //delete old image first
+            if($book->image != null){
+                if(file_exists(public_path('/book/'.$book->image))){
+                    unlink(public_path('/book/'.$book->image));
+                }
+            }
+            //create new author image
+            $fileName = uniqid().$request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path().'/book/' , $fileName);
+            $data['image'] = $fileName;
+
+        }
+
+        if ($request->hasFile('pdfPath')) {
+
+               //delete old image first
+            if($book->pdf_path != null){
+                if(file_exists(public_path('/pdf/'.$book->pdf_path))){
+                    unlink(public_path('/pdf/'.$book->pdf_path));
+                }
+            }
+            $pdfName = uniqid() . $request->file('pdfPath')->getClientOriginalName();
+            $request->file('pdfPath')->move(public_path().'/pdf/', $pdfName);
+            $data['pdf_path'] = $pdfName;
+        }
+
+        Book::where('id',$id)->update($data);
+
+        Alert::success('Book updated successfully');
+        return to_route('book#list');
+    }
+
+    //delete book
+    public function delete($id){
+        Book::where('id',$id)->delete();
+        Alert::success('Book deleted successfully');
+        return to_route('book#list');
+    }
     private function requestBookData($request){
         return([
             'title' => $request->title,
@@ -83,8 +130,8 @@ class BookController extends Controller
         ]);
     }
 
-    private function checkBookValidation($request){
-        $request->validate([
+    private function checkBookValidation($request ,$action){
+       $rule =[
             'title' => 'required',
             'description'=> 'required',
             'categoryId' => 'required',
@@ -92,6 +139,11 @@ class BookController extends Controller
             'image' => 'required|mimes:png,jpg,jpeg,webp',
             'pdfPath' => 'required|mimes:pdf|max:2048',
             'releaseYear' => 'required',
-        ]);
+        ];
+
+        $rule['image'] = $action == 'create' ? 'required|mimes:png,jpeg,jpg,webp|file' : 'mimes:png,jpeg,jpg,webp|file';
+
+        $message = [];
+        $request->validate($rule,$message);
     }
 }

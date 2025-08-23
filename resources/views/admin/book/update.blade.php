@@ -24,7 +24,6 @@
                     @enderror
                 </div>
 
-
                 <div class="col">
                     <div class="row mt-3">
                         <div class="col-2">Title</div>
