@@ -36,7 +36,7 @@
                             <td>{{$item->id}}</td>
                             <td class="col-3"><img src="{{ asset('book/'.$item->image)}}" alt="" class="img-thumbnail rounded shadow-sm" style="" ></td>
                             <td>{{ $item->title}}</td>
-                            <td>{{ Str::limit($item->description, 10, '...') }}</td>
+                            <td>{{ Str::limit($item->description, 14, '...') }}</td>
                             <td>{{ $item->category_name}}</td>
                             <td>{{ $item->author_name}}</td>
                             <td>{{ Str::limit($item->pdf_path, 7, '...') }}</td>

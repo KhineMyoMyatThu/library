@@ -15,7 +15,7 @@
                     <input type="hidden" name="oldImage">
                     <input type="hidden" name="id" value="{{ $book->id }}">
 
-                    <img src="{{ asset($book->image ? 'author/'.$book->image : 'admin/img/open-book-icon-free-vector.jpg') }}" alt="" class="img-thumbnail img-profile" id="output" >
+                    <img src="{{ asset($book->image ? 'book/'.$book->image : 'admin/img/open-book-icon-free-vector.jpg') }}" alt="" class="img-thumbnail img-profile" id="output" >
 
                     <input type="file" name="image" src="" alt="" class="form-control @error('image') is-invalid  @enderror" onchange="loadFile(event)">
 
@@ -46,43 +46,57 @@
                         </div>
                     </div>
 
-                     <div class="row mt-3">
+                    <div class="row mt-3">
                         <div class="col-2">Category Name</div>
                         <div class="col">
-                            <input type="text" name="category_name" class="form-control @error('category_name') is-invalid @enderror" placeholder="Enter category_name.." id="" value="{{ old('category_name', $book->category_name)}}">
+                            <select name="categoryId" id="" class="form-control @error('categoryId') is-invalid @enderror">
+                                <option value="">Choose Category...</option>
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->id }}" {{ old('categoryId', $book->category_id) == $item->id ? 'selected' : '' }}>{{ $item->name}}</option>
+                                        @endforeach
+                                    </select>
 
-                            @error('category_name')
-                            <small class="invalid-feedback">{{$message}}</small>
-                            @enderror
+                                    @error('categoryId')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                         </div>
                     </div>
 
-                     <div class="row mt-3">
-                        <div class="col-2">Author Name</div>
-                        <div class="col">
-                            <input type="text" name="author_name" class="form-control @error('author_name') is-invalid @enderror" placeholder="Enter author_name.." id="" value="{{ old('author_name', $book->author_name)}}">
 
-                            @error('author_name')
-                            <small class="invalid-feedback">{{$message}}</small>
-                            @enderror
+
+                        <div class="row mt-3">
+                            <div class="col-2">Author Name</div>
+                                <div class="col">
+                                    <select name="authorId" id="" class="form-control @error('authorId') is-invalid @enderror">
+                                        <option value="">Choose Author...</option>
+                                    @foreach ($authors as $item)
+                                        <option value="{{ $item->id }}" {{ old('authorId', $book->author_id) == $item->id ? 'selected' : '' }}>{{ $item->name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('authorId')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row mt-3">
-                        <div class="col-2">Book File</div>
+                        <div class="row mt-3">
+                            <div class="col-2">Book File</div>
                         <div class="col">
-                           <input type="file"
-                           name="pdfPath"
-                           accept="application/pdf"
-                           class="form-control @error('pdfPath') is-invalid @enderror"
-                           value="{{ old('pdfPath', $book->pdf_path) }}"
-                           >
+                            <input type="file" name="pdfPath" accept="application/pdf"
+                            class="form-control @error('pdfPath') is-invalid @enderror">
+                    @if($book->pdf_path)
+                        <a href="{{ asset('pdf/'.$book->pdf_path) }}" target="_blank" class="btn btn-sm btn-primary mt-2">
+                            View Current PDF
+                        </a>
+                    @endif
 
-                    @error('pdfPath')
-                        <small class="invalid-feedback">{{ $message }}</small>
+                 @error('pdfPath')
+                    <small class="invalid-feedback">{{ $message }}</small>
                     @enderror
-                        </div>
-                    </div>
+                </div>
+                </div>
+
 
 
                      <div class="row mt-3">

@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -84,7 +85,7 @@ class BookController extends Controller
                //delete old image first
             if($book->image != null){
                 if(file_exists(public_path('/book/'.$book->image))){
-                    unlink(public_path('/book/'.$book->image));
+                    Storage::disk('public')->delete('pdf/' . $book->pdf_path);
                 }
             }
             //create new author image
@@ -96,7 +97,7 @@ class BookController extends Controller
 
         if ($request->hasFile('pdfPath')) {
 
-               //delete old image first
+               //delete old file first
             if($book->pdf_path != null){
                 if(file_exists(public_path('/pdf/'.$book->pdf_path))){
                     unlink(public_path('/pdf/'.$book->pdf_path));
@@ -119,6 +120,7 @@ class BookController extends Controller
         Alert::success('Book deleted successfully');
         return to_route('book#list');
     }
+
     private function requestBookData($request){
         return([
             'title' => $request->title,
@@ -136,12 +138,14 @@ class BookController extends Controller
             'description'=> 'required',
             'categoryId' => 'required',
             'authorId' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg,webp',
-            'pdfPath' => 'required|mimes:pdf|max:2048',
+            'pdfPath' => 'required|mimes:pdf',
             'releaseYear' => 'required',
         ];
 
         $rule['image'] = $action == 'create' ? 'required|mimes:png,jpeg,jpg,webp|file' : 'mimes:png,jpeg,jpg,webp|file';
+
+        $rule['pdfPath'] = $action == 'create' ? 'required|mimes:pdf' : 'mimes:pdf';
+
 
         $message = [];
         $request->validate($rule,$message);
