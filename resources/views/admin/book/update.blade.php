@@ -62,8 +62,6 @@
                         </div>
                     </div>
 
-
-
                         <div class="row mt-3">
                             <div class="col-2">Author Name</div>
                                 <div class="col">
@@ -97,9 +95,7 @@
                 </div>
                 </div>
 
-
-
-                     <div class="row mt-3">
+                <div class="row mt-3">
                         <div class="col-2">Release Year</div>
                         <div class="col">
                             <input type="text" name="releaseYear" class="form-control @error('releaseYear') is-invalid @enderror" placeholder="Enter releaseYear.." id="" value="{{ old('releaseYear', $book->release_year)}}">

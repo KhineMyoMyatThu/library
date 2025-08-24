@@ -10,12 +10,12 @@
             <div class="col">
 
 
-                <div class="card-body">
+                <div class="card-body row">
 
 
                   @if ($books->count() !=0)
                   <div class="card-body shadow ">
-                      <table class="table table-hover shadow-sm row">
+                      <table class="table table-hover shadow-sm ">
                              <thead class="bg-dark">
                             <tr >
                                 <th class="text-white">ID</th>
@@ -27,34 +27,49 @@
                                 <th class="text-white">Book file</th>
                                 <th class="text-white">Release Year</th>
                                 <th class="text-white">Date</th>
-                                <th class="text-white"></th>
+                                <th class="text-white">Action</th>
 
                             </tr>
                         </thead>
+                        <tbody>
                          @foreach ($books as $item)
                             <tr >
                             <td>{{$item->id}}</td>
-                            <td class="col-3"><img src="{{ asset('book/'.$item->image)}}" alt="" class="img-thumbnail rounded shadow-sm" style="" ></td>
+                            <td class="col-3"><img src="{{ asset('book/'.$item->image)}}" alt=""  class="img-thumbnail rounded"
+                         style=" object-fit: cover;" ></td>
                             <td>{{ $item->title}}</td>
                             <td>{{ Str::limit($item->description, 14, '...') }}</td>
                             <td>{{ $item->category_name}}</td>
                             <td>{{ $item->author_name}}</td>
-                            <td>{{ Str::limit($item->pdf_path, 7, '...') }}</td>
+                            <td>
+                             @if($item->pdf_path)
+                                <a href="{{ asset('pdf/'.$item->pdf_path) }}" target="_blank" class="btn btn-sm btn-primary">
+                                 View PDF
+                                </a>
+                             @else
+                                <span class="text-muted">No file</span>
+                            @endif
+                        </td>
                             <td>{{ $item->release_year}}</td>
                             <td class="fs-5">{{$item->created_at->format('j-F-Y')}}</td>
                             <td >
-                                <div class="d-flex">
-                                    <a href="{{ route('book#updatePage',$item->id)}}" class="btn btn-sm btn-warning mr-2">
-                                        <i class="fa-pen-to-square fa-solid "></i>
-                                        </a>
 
-                                <a href="{{ route('book#delete',$item->id)}}" class="btn btn-sm btn-danger ">
-                                    <i class="fa-trash fa-solid "></i>
-                                    </a>
-                                </div>
+                                <div class="d-flex gap-2">
+                                <a href="{{ route('book#updatePage',$item->id)}}" class="btn btn-sm btn-warning mr-2">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a href="{{ route('book#delete',$item->id) }}" >
+
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </a>
+                                    </div>
+
                             </td>
                         </tr>
                      @endforeach
+                    </tbody>
                     </table>
                   </div>
 
