@@ -28,65 +28,24 @@
 
 
           <div class="row g-4 ">
-            <div class="col-lg-3 col-md-4 col-6" data-aos="fade">
+        @foreach($books as $item)
+             <div class="col-lg-3 col-md-4 col-6" data-aos="fade">
                 <div class="book-box rounded shadow">
                       <a href="#">
-                        <img src="img/book1.jpg" class="img-fluid rounded-top book-img" alt="">
+                        <img src="{{ asset('book/'.$item->image)}}" class="img-fluid rounded-top book-img" alt="">
                       </a>
                       <!-- details link -->
                   <div class="p-4 shadow rounded-bottom">
-                    <h5 class="my-3 book-title">တွေ့ချင်လှပြီ</h5>
-                    <p class="book-author">By <a href="#">ဂျူး</a></p>
+                    <h5 class="my-3 book-title">{{ $item->title}}</h5>
+                    <p class="book-author">By <a href="#" class="text-dark fw-5">{{ $item->book_author}}</a></p>
                     <a href="#" class="btn-sm border border-dark rounded-pill px-3 text-dark bg-white hover-effect">
                       <i class="fa-solid fa-bookmark me-2 text-dark"></i>Save
                     </a>
                   </div>
               </div>
             </div>
-             <div class="col-lg-3 col-md-4 col-6"  data-aos="fade">
-                <div class="rounded book-box shadow">
-                      <a href="#">
-                        <img src="img/book2.jpg" class="img-fluid rounded-top book-img" alt="">
-                      </a>
-                  <div class="p-4 shadow rounded-bottom">
-                    <h5 class="my-3 book-title">ဆုံနေရက်နဲ့လွမ်းလေခြင်း</h5>
-                    <p class="book-author">By <a href="#">ဂျူး</a></p>
-                    <a href="#" class="btn-sm border border-dark rounded-pill px-3 text-dark bg-white hover-effect">
-                      <i class="fa-solid fa-bookmark me-2 text-dark"></i>Save
-                    </a>
-                  </div>
-              </div>
-            </div>
-             <div class="col-lg-3 col-md-4 col-6"  data-aos="fade">
-                <div class="rounded book-box shadow">
-                     <a href="#">
-                        <img src="img/book3.jpg" class="img-fluid book-img rounded-top" alt="">
-                      </a>
-                  <div class="p-4 shadow rounded-bottom">
-                    <h5 class="my-3 book-title">မျှော်လင့်ချက်နှင့်တခြားမျက်နှာဖုံးဆောင်းပါးများ</h5>
-                    <p class="book-author">By <a href="#">ဂျူး</a></p>
-                    <a href="#" class="btn-sm border border-dark rounded-pill px-3 text-dark bg-white hover-effect">
-                      <i class="fa-solid fa-bookmark me-2 text-dark"></i>Save
-                    </a>
-                  </div>
-              </div>
-            </div>
-             <div class="col-lg-3 col-md-4 col-6"  data-aos="fade">
-                <div class="rounded shadow book-box">
-                      <a href="#">
-                        <img src="img/book4.jpg"  class="img-fluid book-img rounded-top" alt="">
-                      </a>
-                  <div class="p-4 shadow rounded-bottom">
-                    <h5 class="my-3 book-title">လေလွင့်သူ</h5>
-                    <p class="book-author">By <a href="#">မြသန်းတင့်</a></p>
-                    <a href="#" class="btn-sm border border-dark rounded-pill px-3 text-dark bg-white hover-effect">
-                      <i class="fa-solid fa-bookmark me-2 text-dark"></i>Save
-                    </a>
+        @endforeach
 
-
-                  </div>
-              </div>
-            </div>
           </div>
 
 
@@ -109,72 +68,18 @@
   </div>
 
   <div class="owl-carousel author-carousel">
-    <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
-      <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
-        <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
-      </a>
-    </div>
-      <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
-      <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
-        <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
-      </a>
-    </div>
-    <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
-      <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
-        <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
-      </a>
-    </div>
-      <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
+   @foreach($authors as $item)
+     <div class="author-box text-center p-4 rounded bg-light">
+      <img src="{{ asset('author/'.$item->proflie)}}" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
+      <h5 class="mb-1">{{ $item->name}}</h5>
+      <p class="mb-2">{{ $item->total_book}}</p>
       <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
         <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
       </a>
     </div>
 
-    <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
-      <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
-        <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
-      </a>
-    </div>
-      <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
-      <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
-        <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
-      </a>
-    </div>
+   @endforeach
 
-    <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
-      <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
-        <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
-      </a>
-    </div>
-      <div class="author-box text-center p-4 rounded bg-light">
-      <img src="img/author1.jfif" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
-      <h5 class="mb-1">Jue</h5>
-      <p class="mb-2">30 books</p>
-      <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
-        <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
-      </a>
-    </div>
   </div>
 
 </div>
@@ -194,16 +99,12 @@
 
   <div class="container text-center">
   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  @foreach($categories as $item)
     <div class="col">
-        <a href="#" class="p-4 d-block bg-color rounded shadow text-dark fs-5 ">Novel</a>
-    </div>
-     <div class="col">
-        <a href="#" class="p-4 d-block bg-color rounded shadow text-dark fs-5 ">History</a>
-    </div>
-     <div class="col">
-        <a href="#" class="p-4 d-block bg-color rounded shadow text-dark fs-5 ">Thriller</a>
+        <a href="#" class="p-4 d-block bg-color rounded shadow text-dark fs-5 ">{{ $item->name}}</a>
     </div>
 
+  @endforeach
   </div>
 </div>
 </section>
