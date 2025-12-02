@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/css/custom.css')}}" rel="stylesheet">
 
 </head>
 
@@ -45,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link "  href=""><i class="fas fa-fw fa-table"></i><span>Dashboard </span></a>
+                <a class="nav-link {{Request::routeIs('adminPage')? 'active' : '' }}"  href="{{route('adminPage')}}"><i class="fas fa-fw fa-table"></i><span>Dashboard </span></a>
             </li>
 
             <li class="nav-item">
@@ -53,23 +54,23 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('category#list')}}"><i class="fa-solid fa-list"></i><span>Category List </span></a>
+                <a class="nav-link {{Request::routeIs('category#list')? 'active' : '' }}" href="{{ route('category#list')}}"><i class="fa-solid fa-list"></i><span>Category List </span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('book#create')}}"><i class="fa-solid fa-plus"></i></i><span>Add Book </span></a>
+                <a class="nav-link {{Request::routeIs('book#create')? 'active' : '' }} " href="{{ route('book#create')}}"><i class="fa-solid fa-plus"></i><span>Add Book</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('book#list')}}"><i class="fa-solid fa-book"></i><span>Books List </span></a>
+                <a class="nav-link {{Request::routeIs('book#list')? 'active' : '' }}" href="{{ route('book#list')}}"><i class="fa-solid fa-book"></i><span>Books List </span></a>
             </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="{{  route('author#create') }}"><i class="fa-solid fa-plus"></i></i><span>Add Author </span></a>
+                <a class="nav-link {{ Request::routeIs('author#create')? 'active' : ''}}" href="{{ route('author#create')}}"><i class="fa-solid fa-plus"></i><span>Add Author </span></a>
             </li>
 
-
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('author#list')}}"><i class="fa-solid fa-people-line"></i><span>Author List </span></a>
+                <a class="nav-link {{Request::routeIs('author#list')? 'active' : '' }}" href="{{ route('author#list')}}"><i class="fa-solid fa-people-line"></i><span>Author List </span></a>
             </li>
 
             <li class="nav-item">
@@ -79,7 +80,7 @@
             <li class="nav-item">
                 <form action="{{ route('logout')}}" method="post">
                     @csrf
-                    <span class="nav-link">
+                    <span class="nav-link {{Request::routeIs('logout')? 'active' : '' }}">
                         <button type="submit" class="btn bg-dark text-white"><i
                                 class="fa-solid fa-right-from-bracket"></i> Logout</button>
                     </span>

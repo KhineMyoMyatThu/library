@@ -10,6 +10,7 @@ require_once __DIR__.'/admin.php';
 require_once __DIR__.'/user.php';
 
 Route::get('home', [MainPageController::class,'guestPage'])->name('guest');
+// Route::get('home/book',[MainPageController::class,'bookList'])->name('book#list');
 
 
 

@@ -44,7 +44,7 @@
     <div class="">
     <nav class="navbar navbar-expand-lg navbar-gradient " id="nav-bar">
     <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="img/pngimg.com - book_PNG51090.png" style="width: 50px;" alt=""></a>
+    <a class="navbar-brand" href="#"><img src="#" style="width: 50px;" alt=""></a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -192,7 +192,7 @@
                         <p>Email: Example@gmail.com</p>
                         <p>Phone: +0123 4567 8910</p>
                         <p>Payment Accepted</p>
-                        <img src="img/payment.png" class="img-fluid" alt="">
+                        <img src="#" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -200,17 +200,26 @@
     </div>
 <!-- footer end -->
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- 1. Load jQuery FIRST (Local) -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- 2. Bootstrap Bundle (ONE TIME only) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 3. Plugins -->
 <script src="{{ asset('user/lib/easing/easing.min.js') }}"></script>
-<script src="{{ asset('user/lib/waypoints/waypoints.min.js') }}"></script>
 <script src="{{ asset('user/lib/lightbox/js/lightbox.min.js') }}"></script>
 <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-<script src="{{asset('user/js/main.js')}}"></script>
+
+<!-- 4. AOS (AFTER jQuery) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
+
+<!-- 5. Custom JS -->
+<script src="{{ asset('user/js/main.js') }}"></script>
+
 </html>

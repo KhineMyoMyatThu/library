@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="">
-        <h2>Author</h2>
+        <h2>Book</h2>
     </div>
 
     <form action="{{ route('book#store')}}" method="POST" enctype="multipart/form-data">

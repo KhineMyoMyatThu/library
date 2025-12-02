@@ -1,0 +1,20 @@
+/* override sidebar active link */
+.sidebar .nav-item > .nav-link.active,
+.sidebar .nav-link.active,
+.sidebar .nav-item.active > .nav-link {
+
+    color: #fff !important;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* ensure icons inside active nav-link also turn white */
+.sidebar .nav-link.active i,
+.sidebar .nav-link.active .fas,
+.sidebar .nav-link.active .fa,
+.sidebar .nav-link.active svg,
+.sidebar .nav-link.active .nav-icon {
+    color: #fff !important;
+    fill: #fff !important; /* for SVG icons */
+}
+/* ...existing code... */

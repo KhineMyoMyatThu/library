@@ -72,7 +72,7 @@
      <div class="author-box text-center p-4 rounded bg-light">
       <img src="{{ asset('author/'.$item->proflie)}}" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
       <h5 class="mb-1">{{ $item->name}}</h5>
-      <p class="mb-2">{{ $item->total_book}}</p>
+      <p class="mb-2"></p>
       <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
         <i class="fa fa-shopping-bag me-2 text-dark"></i>Biography
       </a>
@@ -109,5 +109,4 @@
 </div>
 </section>
 <!-- category end -->
-
 @endsection
