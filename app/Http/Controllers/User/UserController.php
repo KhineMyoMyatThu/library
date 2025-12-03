@@ -17,7 +17,7 @@ class UserController extends Controller
         ->leftjoin('authors','books.author_id','authors.id')->get();
 
 
-        $authors = Author::select('authors.id','authors.name','authors.image', 'authors.book_id as book_id','books.title as book_title')
+        $authors = Author::select('authors.id','authors.name','authors.image','books.title as book_title')
         ->leftjoin('books','authors.id','=','books.author_id')
         -> get();
 

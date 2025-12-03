@@ -37,7 +37,7 @@
                       <!-- details link -->
                   <div class="p-4 shadow rounded-bottom">
                     <h5 class="my-3 book-title">{{ $item->title}}</h5>
-                    <p class="book-author">By <a href="#" class="text-dark fw-5">{{ $item->book_author}}</a></p>
+                    <p class="book-author">By <a href="#" class="text-dark text-decoration-underline fw-5">{{ $item->book_author}}</a></p>
                     <a href="#" class="btn-sm border border-dark rounded-pill px-3 text-dark bg-white hover-effect">
                       <i class="fa-solid fa-bookmark me-2 text-dark"></i>Save
                     </a>
@@ -69,8 +69,8 @@
 
   <div class="owl-carousel author-carousel">
    @foreach($authors as $item)
-     <div class="author-box text-center p-4 rounded bg-light">
-      <img src="{{ asset('author/'.$item->proflie)}}" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
+     <div class="author-box text-center h-100 p-4 rounded bg-light " data-aos="fade">
+      <img src="{{ asset('author/'.$item->image)}}" class="img-fluid rounded-circle mb-3 mx-auto" style="width: 120px; height: 120px;" alt="author">
       <h5 class="mb-1">{{ $item->name}}</h5>
       <p class="mb-2"></p>
       <a href="#" class="btn border border-dark rounded-pill px-3 text-dark hover-effect">
@@ -89,8 +89,8 @@
 <!--category  start -->
 <section id="categorySection ">
   <div class="container-fluid py-5 mb-5">
-    <div class="container py-5">
-      <div class="text-center mx-auto mb-5" style="max-width: 700px;">
+    <div class="container ">
+      <div class="text-center mx-auto " style="max-width: 700px;">
         <h1 class="display-3">Categories</h1>
         <p>Some description text here...</p>
       </div>
