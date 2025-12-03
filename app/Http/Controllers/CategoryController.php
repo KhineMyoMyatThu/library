@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,7 +22,7 @@ class CategoryController extends Controller
         $this->checkValidation($request);
 
         Category::create([
-            'name' => $request->categoryName,
+            'name' => Str::studly(trim($request->categoryName)),
             'created_at' => Carbon::now(),
         ]);
 
@@ -44,7 +45,7 @@ class CategoryController extends Controller
 
         Category::where('id',$id)->update(
             [
-                'name' => $request->categoryName,
+                'name' => Str::studly(trim($request->categoryName)),
                 'created_at' => Carbon::now()
             ]
             );
@@ -63,10 +64,11 @@ class CategoryController extends Controller
     private function checkValidation($request){
         $request->validate(
             [
-                'categoryName' => 'required|max:255',
+                'categoryName' => 'required|max:255|unique:categories,name',
 
             ],[
                 'categoryName.required' =>'အမျိုးအစားအမည် လိုအပ်သည်',
+                'categoryName.unique' => 'ဤအမျိုးအစားအမည်ရှိပြီးသားဖြစ်သည်'
             ]
             );
     }
