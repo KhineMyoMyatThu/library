@@ -11,22 +11,39 @@ use Illuminate\Support\Facades\Auth;
 class MainPageController extends Controller
 {
     //
-    public function guestPage(){
+    public function home(Request $request){
 
 
-      $books = Book::select('books.id','books.title','books.image','books.author_id', 'authors.name as book_author')
-        ->leftjoin('authors','books.author_id','authors.id')->get();
+      $books = Book::select(
+        'books.id',
+        'books.title',
+        'books.image',
+        'authors.name as book_author',
+        'books.release_year',
+        'books.category_id',
+        'categories.name as category_name'
+        )
+        ->leftJoin('authors','books.author_id','=','authors.id')
+        ->leftJoin('categories','books.category_id','=','categories.id')
+        ->when($request->filled('searchKey'),function($query ) use ($request){
+            $query->where(function($q) use ($request){
+                 $q->where('books.title','like','%'.$request->searchKey.'%')
+                    ->orWhere('authors.name','like','%'.$request->searchKey.'%')
+                    ->orWhere('categories.name','like','%'.$request->searchKey.'%');
+            });
+        })
+        ->paginate(12)
+        ->withQueryString();
 
-        $authors = Author::select('authors.id','authors.name','authors.image','books.title as book_title')
-        ->leftjoin('books','authors.id','=','books.author_id')
-        -> get();
+
+        $authors = Author::when($request->filled('searchKey'),function($query)use ($request){
+            $query->where('name','like','%'.$request->searchKey.'%');
+        })->get();
 
 
 
         $categories = Category::all();
-    // return view('guest.guestPage',compact('books','authors','categories'));
-
-        return view('user.home.guestPage',compact('books','authors','categories'));
+        return view('user.home.home',compact('books','authors','categories'));
     }
 
     // public function booklist(){
