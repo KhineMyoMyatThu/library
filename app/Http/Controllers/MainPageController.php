@@ -13,41 +13,59 @@ class MainPageController extends Controller
     //
     public function home(Request $request){
 
+        $books = Book::select( 'books.id',
+        'books.title',
+        'books.image',
+        'authors.name as author_name',
+        'authors.image as author_image',
+        'books.release_year',
+        'books.category_id',
+        'categories.name as category_name'
+        )
+        ->leftJoin('authors','books.author_id','=','authors.id')
+        ->leftJoin('categories','books.category_id','=','categories.id')->get();
+        $authors = Author::take(8)->get();
+        $categories = Category::all();
 
-      $books = Book::select(
+        return view('user.home.home', compact('books','authors','categories'));
+
+
+
+    }
+
+   public function search(Request $request){
+
+    $search = $request->input('searchKey');
+    $books = Book::select(
         'books.id',
         'books.title',
         'books.image',
-        'authors.name as book_author',
+        'authors.name as author_name',
+        'authors.image as author_image',
         'books.release_year',
         'books.category_id',
         'categories.name as category_name'
         )
         ->leftJoin('authors','books.author_id','=','authors.id')
         ->leftJoin('categories','books.category_id','=','categories.id')
-        ->when($request->filled('searchKey'),function($query ) use ($request){
-            $query->where(function($q) use ($request){
-                 $q->where('books.title','like','%'.$request->searchKey.'%')
-                    ->orWhere('authors.name','like','%'.$request->searchKey.'%')
-                    ->orWhere('categories.name','like','%'.$request->searchKey.'%');
-            });
+        ->where(function($q) use ($search){
+            $q->where('books.title','like','%'.$search.'%')
+              ->orWhere('authors.name','like','%'.$search.'%')
+              ->orWhere('categories.name','like','%'.$search.'%');
         })
         ->paginate(12)
         ->withQueryString();
 
 
-        $authors = Author::when($request->filled('searchKey'),function($query)use ($request){
-            $query->where('name','like','%'.$request->searchKey.'%');
-        })->get();
+        $authors = Author::select('authors.*')
+        ->where('authors.name','like','%'.$search.'%')
+        ->distinct()
+        ->get();
 
 
 
         $categories = Category::all();
-        return view('user.home.home',compact('books','authors','categories'));
-    }
-
-    // public function booklist(){
-    //     return view('user.home.books');
-    // }
+        return view('user.search.result',compact('books','authors','categories','search'));
+   }
 
 }
