@@ -132,6 +132,16 @@ class BookController extends Controller
         ]);
     }
 
+    //index page
+    public function index(){
+        $books = Book::with('author','category') // eager load
+        ->orderBy('created_at','desc')
+        ->paginate(12);
+        $authors = Author::all();
+        $categories = Category::all();
+        return view('user.home.books',compact('books','authors','categories'));
+    }
+
     private function checkBookValidation($request ,$action){
        $rule =[
             'title' => 'required',

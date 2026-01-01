@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MainPageController;
@@ -12,10 +13,18 @@ require_once __DIR__.'/admin.php';
 
 Route::get('/', [MainPageController::class,'home'])->name('home');
 
-Route::get('/search', [MainPageController::class,'home'])->name('search');
+
+//For search
+Route::get('/search', [MainPageController::class,'search'])->name('search');
+
+
+//For book section
+Route::prefix('books')->group(function(){
+    Route::get('/',[BookController::class,'index'])->name('books.index');
+});
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home',[MainPageController::class,'home'])->name('userHome');
+    Route::get('/dashboard',[MainPageController::class,'home'])->name('userHome');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
