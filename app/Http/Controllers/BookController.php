@@ -121,16 +121,6 @@ class BookController extends Controller
         return to_route('book#list');
     }
 
-    private function requestBookData($request){
-        return([
-            'title' => $request->title,
-            'description' => $request->description,
-            'category_id' => $request->categoryId,
-            'author_id' => $request->authorId,
-            'release_year' => $request->releaseYear,
-
-        ]);
-    }
 
     //index page
     public function index(){
@@ -140,6 +130,32 @@ class BookController extends Controller
         $authors = Author::all();
         $categories = Category::all();
         return view('user.home.books',compact('books','authors','categories'));
+    }
+
+    //detail page
+    public function detail($id){
+
+        $book = Book::where('id',$id)->with('author','category')->first();
+        return view('user.home.detail',compact('book'));
+    }
+
+    //download book
+    public function download($id){
+        $book = Book::where('id',$id)->first();
+
+        return response()->download(public_path('pdf/'.$book->pdf_path));
+    }
+
+
+    private function requestBookData($request){
+        return([
+            'title' => $request->title,
+            'description' => $request->description,
+            'category_id' => $request->categoryId,
+            'author_id' => $request->authorId,
+            'release_year' => $request->releaseYear,
+
+        ]);
     }
 
     private function checkBookValidation($request ,$action){

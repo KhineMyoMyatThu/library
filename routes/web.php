@@ -21,6 +21,8 @@ Route::get('/search', [MainPageController::class,'search'])->name('search');
 //For book section
 Route::prefix('books')->group(function(){
     Route::get('/',[BookController::class,'index'])->name('books.index');
+    Route::get('/{id}',[BookController::class,'detail'])->name('books.detail');
+    Route::get('/download/{id}',[BookController::class,'download'])->name('books.download');
 });
 
 Route::middleware('auth')->group(function () {
