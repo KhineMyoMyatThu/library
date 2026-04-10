@@ -1,14 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
-use Laravel\Socialite\Facades\Socialite;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MainPageController;
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialLoginController;
+use App\Http\Controllers\User\UserController;
+use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 require_once __DIR__.'/admin.php';
+require_once __DIR__.'/user.php';
 
 
 Route::get('/', [MainPageController::class,'home'])->name('home');
@@ -23,6 +25,11 @@ Route::prefix('books')->group(function(){
     Route::get('/',[BookController::class,'index'])->name('books.index');
     Route::get('/{id}',[BookController::class,'detail'])->name('books.detail');
     Route::get('/download/{id}',[BookController::class,'download'])->name('books.download');
+});
+
+//For author section
+Route::prefix('authors')->group(function(){
+    Route::get('/{id}',[AuthorController::class,'detail'])->name('authors.detail');
 });
 
 Route::middleware('auth')->group(function () {

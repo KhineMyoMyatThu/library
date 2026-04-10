@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -93,6 +92,14 @@ class AuthorController extends Controller
 
 
     }
+
+    //detail page
+    public function detail($id){
+        $author = Author::with('books')->findOrFail($id);
+
+        return view('user.home.author', compact('author'));
+    }
+
 
     private function requestAuthorData($request){
         return([
