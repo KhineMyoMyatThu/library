@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialLoginController;
@@ -27,9 +28,19 @@ Route::prefix('books')->group(function(){
     Route::get('/download/{id}',[BookController::class,'download'])->name('books.download');
 });
 
+//For category section
+Route::prefix('categories')->group(function(){
+    Route::get('/',[CategoryController::class,'index'])->name('categories.index');
+});
+
 //For author section
 Route::prefix('authors')->group(function(){
     Route::get('/{id}',[AuthorController::class,'detail'])->name('authors.detail');
+});
+
+//for category section
+Route::prefix('categories')->group(function() {
+    Route::get('/{id}',[CategoryController::class,'detail'])->name('categories.detail');
 });
 
 Route::middleware('auth')->group(function () {
@@ -37,7 +48,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/save/{book}', [BookController::class, 'save'])->name('books.save');
 });
+
+
 
 //googl login github login
 Route::get('/auth/{provider}/redirect',[SocialLoginController::class,'redirect']);

@@ -10,12 +10,23 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class CategoryController extends Controller
 {
-    //
+
+    public function index(){
+        $categories = Category::all();
+        return view('user.home.category', compact('categories'));
+    }
 
     public function list(){
         $categories = Category::orderBy('created_at','desc')->paginate(3);
         return view('admin.category.list', compact('categories'));
     }
+
+    public function detail($id){
+        $categories = Category::all();
+        $category = Category::with('books')->findOrFail($id);
+        return view('user.home.category', compact('categories','category'));
+    }
+
 
     #create category
     public function create(Request $request){
