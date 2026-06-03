@@ -6,10 +6,11 @@ use Carbon\Carbon;
 use App\Models\Book;
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BookController extends Controller
 {
@@ -136,7 +137,17 @@ class BookController extends Controller
     public function detail($id){
 
         $book = Book::where('id',$id)->with('author','category')->first();
-        return view('user.home.detail',compact('book'));
+
+        // Check if user has rated this book
+        $userRating = null;
+        if(Auth::check()) {
+            $rating = Rating::where('user_id', Auth::id())
+                           ->where('book_id', $id)
+                           ->first();
+            $userRating = $rating ? $rating->count : null;
+        }
+
+        return view('user.home.detail', compact('book', 'userRating'));
     }
 
     //download book
@@ -146,6 +157,47 @@ class BookController extends Controller
         return response()->download(public_path('pdf/'.$book->pdf_path));
     }
 
+    //rating book
+    public function rate(Request $request, $id){
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You must be logged in to rate books.',
+            ], 401);
+        }
+
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
+        $user_id = Auth::id();
+
+        //check if user has already rated the book
+        $existingRating = Rating::where('user_id',$user_id)
+        ->where('book_id',$id)
+        ->first();
+
+        if($existingRating){
+            $existingRating->update(['count' => $request->rating]);
+            $message = 'Rating updated successfully';
+        }else{
+            //create new rating
+            Rating::create([
+                'user_id' => $user_id,
+                'book_id' => $id,
+                'count' => $request->rating,
+            ]);
+
+            $message = 'Rating submitted successfully';
+        }
+
+        //return JSON for ajax
+        return response()->json([
+            'success' => true,
+            'message' => $message
+        ]);
+    }
 
     private function requestBookData($request){
         return([

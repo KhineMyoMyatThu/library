@@ -6,7 +6,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialLoginController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -48,12 +47,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('/save/{book}', [BookController::class, 'save'])->name('books.save');
+
 });
 
 
 
-//googl login github login
+//google login github login
 Route::get('/auth/{provider}/redirect',[SocialLoginController::class,'redirect']);
 
 Route::get('/auth/{provider}/callback',[SocialLoginController::class,'callback']);
